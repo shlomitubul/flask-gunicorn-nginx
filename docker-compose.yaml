@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  flask_api:
+    build: ./restapi
+    image: "app:latest"
+    container_name: flask_api
+    restart: always
+    ports:
+      - "8080:8080"
+  
+  nginx:
+    image: "nginxflask:latest"
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - flask_api
